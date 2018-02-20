@@ -1,0 +1,36 @@
+{
+  "name": "itdog-banner",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ShawTim/itdog-banner.git"
+  },
+  "author": "ShawTim",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ShawTim/itdog-banner/issues"
+  },
+  "homepage": "https://github.com/ShawTim/itdog-banner#readme",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-es2015": "^6.24.1",
+    "copy-webpack-plugin": "^4.4.1",
+    "css-loader": "^0.28.9",
+    "html2canvas": "^1.0.0-alpha.9",
+    "image-picker": "^0.3.1",
+    "install": "^0.10.4",
+    "interactjs": "^1.3.3",
+    "jquery": "^3.3.1",
+    "jquery-ui": "^1.12.1",
+    "style-loader": "^0.20.1",
+    "tippy.js": "^2.2.3",
+    "url-loader": "^0.6.2",
+    "webpack": "^3.11.0"
+  },
+  "dependencies": {}
+}
