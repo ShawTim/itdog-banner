@@ -1,4 +1,4 @@
-import '../css/banner.css';
+import '../css/banner.scss';
 import 'image-picker/image-picker/image-picker.css';
 
 import 'image-picker';

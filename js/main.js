@@ -119,7 +119,12 @@ $(function() {
     $(".banner-text").text(text || "");
     setBannerTextStyle();
     convertImage();
-  })
+  });
+
+  $(window).resize((e) => {
+    setBannerTextStyle();
+    convertImage();
+  });
 
   $(".sticker-picker select").val("0").imagepicker({
     initialized: () => tippy(".sticker-picker .image_picker_selector img", {
@@ -160,7 +165,7 @@ $(function() {
     placement: "top",
     arrow: true,
     size: "small",
-    distance: 10,
+    distance: 20,
     html: "#download-tooltip",
   });
 
