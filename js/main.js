@@ -88,17 +88,28 @@ const setResizable = (element, options = {}) => interact(element).resizable($.ex
   const ele = $(e.target);
   const x = parseFloat(ele.attr("data-x") || 0) + e.deltaRect.left;
   const y = parseFloat(ele.attr("data-y") || 0) + e.deltaRect.top;
-  ele.css(options.useTranslate ? {
-    width: `${e.rect.width}px`,
-    height: `${e.rect.height}px`,
-    transform: `translate(${x}px, ${y}px)`,
-  } : {
-    width: `${e.rect.width+Math.abs(x)}px`,
-    height: `${e.rect.height+Math.abs(y)}px`,
-  }).attr({
-    "data-x": x,
-    "data-y": y,
-  });
+
+  if (options.useTranslate) {
+    ele.css({
+      width: `${e.rect.width}px`,
+      height: `${e.rect.height}px`,
+      transform: `translate(${x}px, ${y}px)`,
+    }).attr({
+      "data-x": x,
+      "data-y": y,
+    });
+  } else {
+    // TODO: still need to optimize this
+    const minWidth = (options.restrictSize && options.restrictSize.min && options.restrictSize.min.width) || 0;
+    const minHeight = (options.restrictSize && options.restrictSize.min && options.restrictSize.min.height) || 0;
+    ele.css({
+      width: `${Math.max(e.rect.width + (e.edges.right?x:-x), minWidth)}px`,
+      height: `${Math.max(e.rect.height + (e.edges.bottom?y:-y), minHeight)}px`,
+    }).attr({
+      "data-x": x,
+      "data-y": y,
+    });
+  }
 
   setBannerTextStyle();
 }).on("resizeend", (e) => {
@@ -116,10 +127,13 @@ $(function() {
   });
 
   $(".text-picker input").keyup((e) => {
+    const currentText = $(".banner-text").text();
     const text = e.target.value;
-    $(".banner-text").text(text || "");
-    setBannerTextStyle();
-    convertImage();
+    if (currentText !== text) {
+      $(".banner-text").text(text || "");
+      setBannerTextStyle();
+      convertImage();
+    }
   });
 
   $(window).resize((e) => {
