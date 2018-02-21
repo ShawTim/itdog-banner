@@ -22,11 +22,12 @@ body {
 
       > div {
         display: table-cell;
+        border: solid 1px transparent; /* fix for ios safari, no idea why i need this */
       }
     }
 
     .banner-corner {
-      background: url(./corner.png);
+      background: url(./corner.png) no-repeat;
       width: 140px;
       height: 140px;
     }
@@ -51,6 +52,15 @@ body {
     position: absolute;
     transform: translate(-50%, -50%);
     text-shadow: 2px 0 1px #e6d062, 2px 2px 1px #e6d062, 0 2px 1px #e6d062, -2px 2px 1px #e6d062, -2px 0 1px #e6d062, -2px -2px 1px #e6d062, 0 -2px 1px #e6d062, 2px -2px 1px #e6d062;
+  }
+
+  img {
+    margin: 1px;
+  }
+
+  img:focus {
+    margin: 0px;
+    border: dashed 1px #FFFFFF;
   }
 }
 

@@ -42,6 +42,7 @@ const addSticker = (url) => {
   setDraggable(image.get(0));
   setResizable(image.get(0), { preserveAspectRatio: true, useTranslate: true });
   image.mouseover(function(e) { $(this).focus(); });
+  image.bind("touchstart", function(e) { $(this).focus(); });
   image.keyup(function(e) {
     console.log(e.keyCode)
     if (e.keyCode === 27 || e.keyCode === 8 || e.keyCode === 46) {
