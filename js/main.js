@@ -20,9 +20,13 @@ const setBannerTextStyle = () => {
   const text = banner.text();
   const maxW = container.width() * 0.9;
   const maxH = container.height() * 0.9;
+  const isLeftToRight = maxW >= maxH;
   const { x, y } = getCenter();
 
-  const div = $("<div></div>").css("font-size", "1em").addClass("text-font").text(text);
+  const div = $("<div></div>").css({
+    "font-size": "1em",
+    "writing-mode": isLeftToRight ? "lr" : "tb",
+  }).addClass("text-font").text(text);
   $(document.body).append(div);
   const w = div.width();
   const h = div.height();
@@ -32,6 +36,7 @@ const setBannerTextStyle = () => {
     top: y,
     left: x,
     fontSize: `${Math.min(maxW/w, maxH/h)}em`,
+    "writing-mode": isLeftToRight ? "lr" : "tb",
   });
 }
 
