@@ -1,10 +1,7 @@
 import html2canvas from 'html2canvas';
 import interact from 'interactjs';
+import FileSaver from "file-saver";
 import tippy from 'tippy.js';
-
-const convertImage = () => {
-  html2canvas($(".image-container").get(0)).then((canvas) => $(".download-link").attr("href", canvas.toDataURL("image/png")));
-};
 
 const getCenter = () => {
   const center = $(".banner-center-center");
@@ -72,7 +69,6 @@ const setDraggable = (element, options = {}) => interact(element).draggable($.ex
       "data-y": y,
     })
   },
-  onend: () => convertImage(),
 }, options));
 
 const setResizable = (element, options = {}) => interact(element).resizable($.extend(true, {}, {
@@ -118,7 +114,6 @@ const setResizable = (element, options = {}) => interact(element).resizable($.ex
 
   setBannerTextStyle();
 }).on("resizeend", (e) => {
-  convertImage();
 });
 
 $(function() {
@@ -137,13 +132,11 @@ $(function() {
     if (currentText !== text) {
       $(".banner-text").text(text || "");
       setBannerTextStyle();
-      convertImage();
     }
   });
 
   $(window).resize((e) => {
     setBannerTextStyle();
-    convertImage();
   });
 
   $(".sticker-picker select").val("0").imagepicker({
@@ -190,5 +183,10 @@ $(function() {
   });
 
   setBannerTextStyle();
-  convertImage();
+
+  $(".convert-button button").click((e) => {
+    html2canvas($(".image-container").get(0)).then((canvas) => {
+      canvas.toBlob((blob) => FileSaver.saveAs(blob, "IT狗年快樂.png"));
+    });
+  });
 });
